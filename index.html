@@ -378,9 +378,9 @@
     <li><a href="contact.html">お問い合わせ</a></li>
   </ul>
   <a href="contact.html" class="nav-cta">無料相談する</a>
-  <div class="hamburger" onclick="toggleMenu()">
+  <button class="hamburger" onclick="toggleMenu()" aria-label="メニュー">
     <span></span><span></span><span></span>
-  </div>
+  </button>
 </nav>
 
 <!-- ヒーロー -->
@@ -510,16 +510,15 @@
     <p>荒金 亜弓（あらかね あゆみ）</p>
     <p>大分県速見郡日出町</p>
     <p>TEL: <a href="tel:08042818276">080-4281-8276</a></p>
-    <p>E-mail: <a href="/cdn-cgi/l/email-protection#b9d8cbd8d2d8d7dcf9d894dad6d7d7dcdacd94d1d0d3d097dad6d4"><span class="__cf_email__" data-cfemail="caabb8aba1aba4af8aabe7a9a5a4a4afa9bee7a2a3a0a3e4a9a5a7">[email&#160;protected]</span></a></p>
+    <p>E-mail: <a href="mailto:arakane@a-connect-hiji.com">arakane@a-connect-hiji.com</a></p>
   </div>
   <p class="footer-copy">© 2025 A-connect All rights reserved.</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 function toggleMenu() {
-  const links = document.querySelector('.nav-links');
-  links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
-  if (links.style.display === 'flex') {
-    links.style.flexDirection = 'column';
-    links.style.position = 'absolute';
-    
+  document.getElementById('nav-menu').classList.toggle('open');
+}
+</script>
+</body>
+</html>
