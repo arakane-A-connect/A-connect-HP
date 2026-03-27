@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>A-connect（エーコネクト）｜オンライン事務代行・バックオフィス支援</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
     --green-deep: #2d5a3d;
@@ -181,10 +181,10 @@
   }
   .visual-price-label { font-size: 0.65rem; color: var(--text-light); letter-spacing: 0.1em; }
   .visual-price-amount {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 400;
     font-size: 2rem; color: var(--green-deep); font-weight: 400;
   }
-  .visual-price-unit { font-size: 0.7rem; color: var(--text-light); }
+  .visual-price-unit { font-size: 0.68rem; color: var(--text-light); }
 
   /* 特徴セクション */
   .features {
@@ -267,11 +267,11 @@
     text-transform: uppercase;
   }
   .plan-price {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
     font-size: 2.2rem; color: var(--green-deep);
     margin-bottom: 0.3rem;
   }
-  .plan-price span { font-size: 1rem; }
+  .plan-price .tax { font-size: 0.68rem; font-weight: 300; display: block; margin-top: 0.1rem; color: inherit; opacity: 0.75; }
   .plan-hours {
     font-size: 0.75rem; color: var(--text-light);
     margin-bottom: 1.5rem;
@@ -326,7 +326,7 @@
   .footer-info a { color: var(--green-pale); text-decoration: none; }
   .footer-copy { font-size: 0.65rem; letter-spacing: 0.08em; }
 
-  /* ハンバーガー（モバイル） */
+  /* スマホナビ */
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
   .hamburger span { width: 22px; height: 1.5px; background: var(--green-deep); display: block; transition: 0.3s; }
 
@@ -344,6 +344,13 @@
 
   /* レスポンシブ */
   @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--cream); padding: 1rem 1.5rem; border-bottom: 1px solid var(--green-pale); gap: 0; z-index: 99; }
+    .nav-links.open { display: flex; }
+    .nav-links li { border-bottom: 1px solid var(--green-mist); }
+    .nav-links a { display: block; padding: 0.8rem 0; font-size: 0.9rem; }
+    .hamburger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; padding: 4px; cursor: pointer; }
+    .hamburger span { width: 22px; height: 1.5px; background: var(--green-deep); display: block; }
     .hero { grid-template-columns: 1fr; }
     .hero-left { padding: 4rem 2rem; }
     .hero-right { padding: 3rem 2rem; }
@@ -364,7 +371,7 @@
 <!-- ナビゲーション -->
 <nav>
   <a href="index.html" class="nav-logo">A<span>-connect</span></a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-menu">
     <li><a href="about.html">わたしについて</a></li>
     <li><a href="service.html">サービス</a></li>
     <li><a href="estimate.html">概算見積</a></li>
@@ -420,7 +427,7 @@
       </div>
       <div class="visual-price">
         <p class="visual-price-label">月額サブスクプラン</p>
-        <p class="visual-price-amount">¥22,000<span class="visual-price-unit">〜 / 月</span></p>
+        <p class="visual-price-amount">22,000円<span class="visual-price-unit">（税込）〜 / 月</span></p>
         <p class="visual-price-unit">※ 5時間 / 月〜 追加費用なし</p>
       </div>
     </div>
@@ -463,19 +470,19 @@
   <div class="plans-grid">
     <div class="plan-card">
       <p class="plan-name">Light Plan</p>
-      <p class="plan-price"><span>¥</span>20,000</p>
+      <p class="plan-price">22,000円<span class="tax">（税込）</span></p>
       <p class="plan-hours">5時間 / 月</p>
       <a href="estimate.html" class="plan-link">見積を出す</a>
     </div>
     <div class="plan-card featured">
       <p class="plan-name">Standard Plan</p>
-      <p class="plan-price"><span>¥</span>39,000</p>
+      <p class="plan-price">42,900円<span class="tax">（税込）</span></p>
       <p class="plan-hours">10時間 / 月</p>
       <a href="estimate.html" class="plan-link">見積を出す</a>
     </div>
     <div class="plan-card">
       <p class="plan-name">Premium Plan</p>
-      <p class="plan-price"><span>¥</span>76,000</p>
+      <p class="plan-price">83,600円<span class="tax">（税込）</span></p>
       <p class="plan-hours">20時間 / 月</p>
       <a href="estimate.html" class="plan-link">見積を出す</a>
     </div>

@@ -5,20 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>お問い合わせ｜A-connect（エーコネクト）</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
     --green-deep: #2d5a3d; --green-mid: #4a7c5f;
     --green-light: #7aab8a; --green-pale: #c8dfc0;
     --green-mist: #eef5eb; --cream: #faf8f3;
     --text-dark: #1e2a1f; --text-mid: #4a5a4c; --text-light: #7a8a7c;
-    --accent: #8b6914; --accent-light: #d4a843;
+    --accent-light: #d4a843;
+    --error: #c0392b; --error-bg: #fdf0ee; --error-border: #f0a090;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Noto Sans JP', sans-serif; background: var(--cream); color: var(--text-dark); font-weight: 300; }
+
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(250,248,243,0.95); backdrop-filter: blur(8px);
+    background: rgba(250,248,243,0.97); backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--green-pale);
     padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px;
   }
@@ -27,65 +29,67 @@
   .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a { text-decoration: none; color: var(--text-mid); font-size: 0.8rem; letter-spacing: 0.08em; transition: color 0.2s; }
   .nav-links a:hover, .nav-links a.active { color: var(--green-deep); }
-  .nav-cta { background: var(--green-deep); color: white; padding: 0.5rem 1.2rem; border-radius: 2px; font-size: 0.75rem; letter-spacing: 0.1em; text-decoration: none; }
+  .nav-cta { background: var(--green-deep); color: white; padding: 0.5rem 1.2rem; border-radius: 2px; font-size: 0.75rem; text-decoration: none; white-space: nowrap; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { width: 22px; height: 1.5px; background: var(--green-deep); display: block; }
 
   .page-header { padding-top: 64px; background: var(--green-deep); padding-bottom: 4rem; text-align: center; }
   .page-header-en { font-family: 'Cormorant Garamond', serif; font-size: 0.8rem; letter-spacing: 0.3em; color: var(--green-pale); margin-bottom: 0.8rem; margin-top: 3rem; font-style: italic; }
-  .page-header-title { font-family: 'Noto Serif JP', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); color: white; font-weight: 300; }
+  .page-header-title { font-family: 'Noto Serif JP', serif; font-size: clamp(1.4rem, 4vw, 2.2rem); color: white; font-weight: 300; }
 
-  /* 問い合わせ方法 */
-  .contact-section { padding: 5rem 4rem; max-width: 900px; margin: 0 auto; }
-  .section-header { text-align: center; margin-bottom: 3rem; }
+  .contact-section { padding: 4rem 2rem; max-width: 860px; margin: 0 auto; }
+  .section-header { text-align: center; margin-bottom: 2.5rem; }
   .section-en { font-family: 'Cormorant Garamond', serif; font-size: 0.8rem; letter-spacing: 0.3em; color: var(--green-light); text-transform: uppercase; margin-bottom: 0.8rem; }
-  .section-title { font-family: 'Noto Serif JP', serif; font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 300; color: var(--green-deep); }
+  .section-title { font-family: 'Noto Serif JP', serif; font-size: clamp(1.1rem, 3vw, 1.6rem); font-weight: 300; color: var(--green-deep); }
   .section-line { width: 40px; height: 1px; background: var(--green-light); margin: 1rem auto 0; }
 
-  /* 連絡手段カード */
-  .contact-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 4rem; }
-  .method-card {
-    background: white; border: 1px solid var(--green-pale); border-radius: 4px;
-    padding: 2rem; text-align: center; transition: all 0.3s;
-  }
-  .method-card:hover { box-shadow: 0 8px 30px rgba(45,90,61,0.1); border-color: var(--green-light); }
-  .method-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+  .contact-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 3rem; }
+  .method-card { background: white; border: 1px solid var(--green-pale); border-radius: 4px; padding: 1.5rem 1rem; text-align: center; transition: all 0.3s; }
+  .method-card:hover { box-shadow: 0 6px 20px rgba(45,90,61,0.1); border-color: var(--green-light); }
+  .method-icon { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; }
   .method-title { font-family: 'Noto Serif JP', serif; font-size: 0.9rem; color: var(--green-deep); font-weight: 400; margin-bottom: 0.5rem; }
-  .method-value { font-size: 0.78rem; color: var(--text-mid); margin-bottom: 1rem; line-height: 1.7; }
-  .method-btn {
-    display: inline-block; padding: 0.6rem 1.2rem;
-    background: var(--green-deep); color: white;
-    font-size: 0.72rem; border-radius: 2px; text-decoration: none;
-    transition: background 0.2s;
-  }
+  .method-value { font-size: 0.75rem; color: var(--text-mid); margin-bottom: 1rem; line-height: 1.7; }
+  .method-btn { display: block; padding: 0.6rem 1rem; background: var(--green-deep); color: white; font-size: 0.72rem; border-radius: 2px; text-decoration: none; transition: background 0.2s; text-align: center; }
   .method-btn:hover { background: var(--green-mid); }
   .method-btn.line { background: #06C755; }
   .method-btn.line:hover { background: #05a848; }
 
-  /* 区切り */
-  .divider { display: flex; align-items: center; gap: 1rem; margin: 2rem 0; }
+  .divider { display: flex; align-items: center; gap: 1rem; margin: 1.5rem 0; }
   .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--green-pale); }
   .divider span { font-size: 0.72rem; color: var(--text-light); white-space: nowrap; }
 
-  /* メールフォーム */
-  .form-section { background: white; border: 1px solid var(--green-pale); border-radius: 4px; padding: 2.5rem; }
-  .form-title { font-family: 'Noto Serif JP', serif; font-size: 1rem; color: var(--green-deep); font-weight: 400; margin-bottom: 2rem; text-align: center; }
+  /* フォーム */
+  .form-section { background: white; border: 1px solid var(--green-pale); border-radius: 4px; padding: 2rem; }
+  .form-title { font-family: 'Noto Serif JP', serif; font-size: 1rem; color: var(--green-deep); font-weight: 400; margin-bottom: 1.8rem; text-align: center; }
 
-  .form-group { margin-bottom: 1.5rem; }
-  .form-label { display: block; font-size: 0.75rem; color: var(--text-mid); margin-bottom: 0.5rem; letter-spacing: 0.05em; }
-  .form-label .required { color: #c8796a; font-size: 0.65rem; margin-left: 0.3rem; }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-label { display: block; font-size: 0.75rem; color: var(--text-mid); margin-bottom: 0.4rem; }
+  .form-label .required { color: var(--error); font-size: 0.65rem; margin-left: 0.3rem; }
+  .form-label .optional { color: var(--text-light); font-size: 0.65rem; margin-left: 0.3rem; }
+
   .form-input, .form-select, .form-textarea {
     width: 100%; padding: 0.75rem 1rem;
     border: 1px solid var(--green-pale); border-radius: 3px;
-    font-family: 'Noto Sans JP', sans-serif; font-size: 0.8rem;
+    font-family: 'Noto Sans JP', sans-serif; font-size: 0.82rem;
     color: var(--text-dark); background: var(--cream);
-    transition: border-color 0.2s; outline: none;
+    transition: border-color 0.2s; outline: none; -webkit-appearance: none;
   }
   .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--green-mid); background: white; }
-  .form-textarea { height: 140px; resize: vertical; line-height: 1.8; }
+  .form-input.error, .form-textarea.error { border-color: var(--error-border); background: var(--error-bg); }
+  .form-input.ok { border-color: var(--green-light); }
+  .form-textarea { height: 130px; resize: vertical; line-height: 1.8; }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
+  /* エラーメッセージ（各フィールド下） */
+  .field-error {
+    display: none; font-size: 0.7rem; color: var(--error);
+    margin-top: 0.35rem; padding-left: 0.2rem;
+  }
+  .field-error.show { display: block; }
+
   .check-group { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
-  .form-check { display: flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; color: var(--text-mid); cursor: pointer; }
-  .form-check input { accent-color: var(--green-deep); }
+  .form-check { display: flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; color: var(--text-mid); cursor: pointer; padding: 0.4rem 0; }
+  .form-check input { accent-color: var(--green-deep); width: 16px; height: 16px; flex-shrink: 0; }
 
   .form-submit {
     width: 100%; padding: 1rem;
@@ -93,54 +97,72 @@
     border: none; border-radius: 2px; font-size: 0.85rem;
     font-family: 'Noto Sans JP', sans-serif;
     letter-spacing: 0.1em; cursor: pointer; transition: background 0.2s;
-    margin-top: 0.5rem;
+    margin-top: 0.8rem; -webkit-appearance: none;
   }
   .form-submit:hover { background: var(--green-mid); }
-  .form-note { font-size: 0.7rem; color: var(--text-light); text-align: center; margin-top: 1rem; line-height: 1.8; }
 
-  /* 営業時間 */
-  .hours-section { padding: 3rem 4rem; background: var(--green-mist); }
-  .hours-section .inner { max-width: 900px; margin: 0 auto; display: flex; gap: 3rem; align-items: center; flex-wrap: wrap; }
+  .form-note { font-size: 0.7rem; color: var(--text-light); text-align: center; margin-top: 1rem; line-height: 1.9; }
+
+  /* メール送信の説明ボックス */
+  .mailto-note {
+    background: var(--green-mist); border: 1px solid var(--green-pale);
+    border-radius: 3px; padding: 0.9rem 1rem; margin-bottom: 1.2rem;
+    font-size: 0.75rem; color: var(--text-mid); line-height: 1.8;
+  }
+  .mailto-note strong { color: var(--green-deep); }
+
+  .success-msg { display: none; text-align: center; padding: 2rem 1rem; }
+  .success-msg.show { display: block; }
+  .success-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .success-title { font-family: 'Noto Serif JP', serif; font-size: 1.1rem; color: var(--green-deep); margin-bottom: 0.8rem; }
+  .success-text { font-size: 0.8rem; color: var(--text-mid); line-height: 2; }
+
+  .hours-section { padding: 3rem 2rem; background: var(--green-mist); }
+  .hours-inner { max-width: 860px; margin: 0 auto; display: flex; gap: 3rem; flex-wrap: wrap; }
   .hours-title { font-family: 'Noto Serif JP', serif; font-size: 0.9rem; color: var(--green-deep); font-weight: 400; margin-bottom: 1rem; }
-  .hours-table { font-size: 0.78rem; color: var(--text-mid); }
-  .hours-row { display: flex; gap: 2rem; padding: 0.4rem 0; border-bottom: 1px solid var(--green-pale); }
-  .hours-day { min-width: 80px; }
+  .hours-row { display: flex; gap: 2rem; padding: 0.4rem 0; border-bottom: 1px solid var(--green-pale); font-size: 0.78rem; color: var(--text-mid); }
+  .hours-day { min-width: 70px; }
   .hours-note { font-size: 0.72rem; color: var(--text-light); margin-top: 0.8rem; }
 
-  footer { background: var(--text-dark); color: var(--text-light); padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  footer { background: #1e2a1f; color: #7a8a7c; padding: 2.5rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
   .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: white; letter-spacing: 0.15em; }
   .footer-info { font-size: 0.72rem; line-height: 1.9; }
   .footer-info a { color: var(--green-pale); text-decoration: none; }
   .footer-copy { font-size: 0.65rem; }
 
-  /* 送信完了 */
-  .success-msg { display: none; text-align: center; padding: 2rem; }
-  .success-msg.show { display: block; }
-  .success-icon { font-size: 3rem; margin-bottom: 1rem; }
-  .success-title { font-family: 'Noto Serif JP', serif; font-size: 1.2rem; color: var(--green-deep); margin-bottom: 0.8rem; }
-  .success-text { font-size: 0.8rem; color: var(--text-mid); line-height: 2; }
-
   @media (max-width: 768px) {
-    .contact-section { padding: 3rem 1.5rem; }
-    .contact-methods { grid-template-columns: 1fr; }
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--cream); padding: 1rem 1.5rem; border-bottom: 1px solid var(--green-pale); gap: 0; z-index: 99; }
+    .nav-links.open { display: flex; }
+    .nav-links li { border-bottom: 1px solid var(--green-mist); }
+    .nav-links a { display: block; padding: 0.8rem 0; font-size: 0.9rem; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .contact-section { padding: 2.5rem 1.2rem; }
+    .contact-methods { grid-template-columns: 1fr; gap: 0.8rem; }
     .form-grid { grid-template-columns: 1fr; }
     .check-group { grid-template-columns: 1fr; }
-    .hours-section { padding: 2rem 1.5rem; }
-    .nav-links { display: none; }
-    footer { padding: 2rem; flex-direction: column; text-align: center; }
+    .form-section { padding: 1.5rem 1rem; }
+    .hours-section { padding: 2rem 1.2rem; }
+    .hours-inner { gap: 1.5rem; }
+    footer { padding: 2rem 1.2rem; flex-direction: column; text-align: center; }
   }
 </style>
 </head>
 <body>
+
 <nav>
   <a href="index.html" class="nav-logo">A<span>-connect</span></a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-menu">
     <li><a href="about.html">わたしについて</a></li>
     <li><a href="service.html">サービス</a></li>
     <li><a href="estimate.html">概算見積</a></li>
     <li><a href="contact.html" class="active">お問い合わせ</a></li>
   </ul>
   <a href="contact.html" class="nav-cta">無料相談する</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <div class="page-header">
@@ -155,7 +177,6 @@
     <div class="section-line"></div>
   </div>
 
-  <!-- 連絡手段 -->
   <div class="contact-methods">
     <div class="method-card">
       <span class="method-icon">📞</span>
@@ -167,103 +188,121 @@
       <span class="method-icon">💬</span>
       <p class="method-title">LINE</p>
       <p class="method-value">LINEでのお問い合わせも<br>お気軽にどうぞ</p>
-      <a href="#" class="method-btn line">LINEで相談する</a>
+      <a href="https://line.me/ti/p/snst01222020" class="method-btn line" target="_blank" rel="noopener">LINEで相談する</a>
     </div>
     <div class="method-card">
       <span class="method-icon">✉️</span>
       <p class="method-title">メール</p>
-      <p class="method-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a8c9dac9c3c9c6cde8c985cbc7c6c6cdcbdc85c0c1c2c186cbc7c5">[email&#160;protected]</a><br>24時間受付</p>
-      <a href="/cdn-cgi/l/email-protection#48293a292329262d0829652b2726262d2b3c6520212221662b2725" class="method-btn">メールを送る</a>
+      <p class="method-value">arakane@a-connect-hiji.com<br>24時間受付</p>
+      <a href="mailto:arakane@a-connect-hiji.com" class="method-btn">メールを送る</a>
     </div>
   </div>
 
   <div class="divider"><span>または下記フォームからもどうぞ</span></div>
 
-  <!-- メールフォーム -->
   <div class="form-section">
     <p class="form-title">お問い合わせフォーム</p>
+
+    <div class="mailto-note">
+      <strong>📧 送信の仕組みについて</strong><br>
+      「送信する」を押すと、お使いのメールアプリ（Gmail・Outlookなど）が開きます。<br>
+      内容を確認して「送信」を押してください。メールが届かない場合は直接 <strong>arakane@a-connect-hiji.com</strong> へご連絡ください。
+    </div>
 
     <div id="form-area">
       <div class="form-grid">
         <div class="form-group">
           <label class="form-label">お名前 <span class="required">必須</span></label>
-          <input type="text" class="form-input" id="name" placeholder="山田 太郎">
+          <input type="text" class="form-input" id="name" placeholder="山田 太郎"
+            oninput="validateName()">
+          <p class="field-error" id="err-name">お名前を入力してください。</p>
         </div>
         <div class="form-group">
-          <label class="form-label">会社名・屋号</label>
+          <label class="form-label">会社名・屋号 <span class="optional">任意</span></label>
           <input type="text" class="form-input" id="company" placeholder="〇〇株式会社">
         </div>
       </div>
+
       <div class="form-grid">
         <div class="form-group">
           <label class="form-label">メールアドレス <span class="required">必須</span></label>
-          <input type="email" class="form-input" id="email" placeholder="example@mail.com">
+          <input type="text" class="form-input" id="email" placeholder="example@mail.com"
+            oninput="validateEmail()">
+          <p class="field-error" id="err-email">正しいメールアドレスを入力してください。<br>例：sample@example.com</p>
         </div>
         <div class="form-group">
-          <label class="form-label">電話番号</label>
-          <input type="tel" class="form-input" id="tel" placeholder="090-0000-0000">
+          <label class="form-label">電話番号 <span class="optional">任意</span></label>
+          <input type="text" class="form-input" id="tel" placeholder="例：090-1234-5678"
+            oninput="validateTel()">
+          <p class="field-error" id="err-tel">
+            ハイフンあり・固定電話（10桁）または携帯電話（11桁）の形式で入力してください。<br>
+            例：090-1234-5678 ／ 0977-12-3456
+          </p>
         </div>
       </div>
+
       <div class="form-group">
-        <label class="form-label">ご希望のサービス（複数選択OK）</label>
+        <label class="form-label">ご希望のサービス <span class="optional">任意・複数選択OK</span></label>
         <div class="check-group">
-          <label class="form-check"><input type="checkbox"> 一般事務・書類作成</label>
-          <label class="form-check"><input type="checkbox"> 秘書・スケジュール管理</label>
-          <label class="form-check"><input type="checkbox"> 経理・請求書作成</label>
-          <label class="form-check"><input type="checkbox"> ITサポート・デジタル化</label>
-          <label class="form-check"><input type="checkbox"> Web・SNS・集客支援</label>
-          <label class="form-check"><input type="checkbox"> 新人社員教育代行</label>
+          <label class="form-check"><input type="checkbox" name="service" value="一般事務・書類作成"> 一般事務・書類作成</label>
+          <label class="form-check"><input type="checkbox" name="service" value="秘書・スケジュール管理"> 秘書・スケジュール管理</label>
+          <label class="form-check"><input type="checkbox" name="service" value="経理・請求書作成"> 経理・請求書作成</label>
+          <label class="form-check"><input type="checkbox" name="service" value="ITサポート・デジタル化"> ITサポート・デジタル化</label>
+          <label class="form-check"><input type="checkbox" name="service" value="Web・SNS・集客支援"> Web・SNS・集客支援</label>
+          <label class="form-check"><input type="checkbox" name="service" value="新人社員教育代行"> 新人社員教育代行</label>
         </div>
       </div>
+
       <div class="form-group">
-        <label class="form-label">ご希望のプラン</label>
+        <label class="form-label">ご希望のプラン <span class="optional">任意</span></label>
         <select class="form-select" id="plan">
           <option value="">選択してください</option>
-          <option>ライトプラン（月5時間 / ¥22,000〜）</option>
-          <option>スタンダードプラン（月10時間 / ¥42,900〜）</option>
-          <option>プレミアムプラン（月20時間 / ¥83,600〜）</option>
+          <option>ライトプラン（月5時間 / 22,000円・税込）</option>
+          <option>スタンダードプラン（月10時間 / 42,900円・税込）</option>
+          <option>プレミアムプラン（月20時間 / 83,600円・税込）</option>
           <option>まだ決まっていない・相談したい</option>
         </select>
       </div>
+
       <div class="form-group">
         <label class="form-label">お問い合わせ内容 <span class="required">必須</span></label>
-        <textarea class="form-textarea" id="message" placeholder="ご相談内容をお気軽にご記入ください。&#10;「〇〇の業務を月〇時間ほど依頼したい」など、ざっくりでも大丈夫です。"></textarea>
+        <textarea class="form-textarea" id="message" placeholder="ご相談内容をお気軽にご記入ください。&#10;「〇〇の業務を月〇時間ほど依頼したい」など、ざっくりでも大丈夫です。"
+          oninput="validateMessage()"></textarea>
+        <p class="field-error" id="err-message">お問い合わせ内容を入力してください。</p>
       </div>
-      <button class="form-submit" onclick="submitForm()">送信する</button>
+
+      <button class="form-submit" id="submit-btn" onclick="submitForm()">送信する</button>
       <p class="form-note">
-        ※ 通常2営業日以内にご返信いたします。<br>
+        ※ 送信後、メールアプリが開きます。そのまま「送信」を押してください。<br>
         ※ お急ぎの場合はお電話（080-4281-8276）またはLINEにてご連絡ください。
       </p>
     </div>
 
     <div class="success-msg" id="success-msg">
       <div class="success-icon">🌿</div>
-      <p class="success-title">お問い合わせありがとうございます</p>
+      <p class="success-title">メールアプリが開きました</p>
       <p class="success-text">
-        内容を確認の上、2営業日以内にご返信いたします。<br>
-        お急ぎの場合はお電話（080-4281-8276）にてご連絡ください。
+        メールアプリの「送信」ボタンを押して送信を完了してください。<br>
+        送信後、2営業日以内にご返信いたします。<br>
+        ご不明な場合はお電話（080-4281-8276）へどうぞ。
       </p>
     </div>
   </div>
 </section>
 
-<!-- 営業時間 -->
 <section class="hours-section">
-  <div class="inner">
+  <div class="hours-inner">
     <div>
       <p class="hours-title">営業時間</p>
-      <div class="hours-table">
-        <div class="hours-row"><span class="hours-day">平日</span><span>9:00〜18:00</span></div>
-        <div class="hours-row"><span class="hours-day">土曜日</span><span>応相談</span></div>
-        <div class="hours-row"><span class="hours-day">日・祝日</span><span>休業</span></div>
-      </div>
+      <div class="hours-row"><span class="hours-day">平日</span><span>9:00〜18:00</span></div>
+      <div class="hours-row"><span class="hours-day">土曜日</span><span>応相談</span></div>
+      <div class="hours-row"><span class="hours-day">日・祝日</span><span>休業</span></div>
       <p class="hours-note">※ メール・LINEは24時間受付しております。</p>
     </div>
     <div>
       <p class="hours-title">所在地</p>
       <p style="font-size:0.78rem;color:var(--text-mid);line-height:2;">
-        大分県速見郡日出町<br>
-        ※ オンラインにて全国対応いたします。
+        大分県速見郡日出町<br>※ オンラインにて全国対応いたします。
       </p>
     </div>
   </div>
@@ -278,12 +317,129 @@
     <p>荒金 亜弓（あらかね あゆみ）</p>
     <p>大分県速見郡日出町</p>
     <p>TEL: <a href="tel:08042818276">080-4281-8276</a></p>
-    <p>E-mail: <a href="/cdn-cgi/l/email-protection#6b0a190a000a050e2b0a46080405050e081f460302010245080406"><span class="__cf_email__" data-cfemail="83e2f1e2e8e2ede6c3e2aee0ecedede6e0f7aeebeae9eaade0ecee">[email&#160;protected]</span></a></p>
+    <p>E-mail: <a href="mailto:arakane@a-connect-hiji.com">arakane@a-connect-hiji.com</a></p>
   </div>
   <p class="footer-copy">© 2025 A-connect All rights reserved.</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+function toggleMenu() {
+  document.getElementById('nav-menu').classList.toggle('open');
+}
+
+/* ---- バリデーション関数 ---- */
+
+function validateName() {
+  var val = document.getElementById('name').value.trim();
+  var el = document.getElementById('name');
+  var err = document.getElementById('err-name');
+  if (!val) {
+    el.classList.add('error'); el.classList.remove('ok');
+    err.classList.add('show'); return false;
+  }
+  el.classList.remove('error'); el.classList.add('ok');
+  err.classList.remove('show'); return true;
+}
+
+function validateEmail() {
+  var val = document.getElementById('email').value.trim();
+  var el = document.getElementById('email');
+  var err = document.getElementById('err-email');
+  // メールアドレスの基本チェック：@が1つ・前後に文字・ドットあり
+  var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!val || !regex.test(val)) {
+    el.classList.add('error'); el.classList.remove('ok');
+    err.classList.add('show'); return false;
+  }
+  el.classList.remove('error'); el.classList.add('ok');
+  err.classList.remove('show'); return true;
+}
+
+function validateTel() {
+  var val = document.getElementById('tel').value.trim();
+  var el = document.getElementById('tel');
+  var err = document.getElementById('err-tel');
+  // 空欄はOK（任意項目）
+  if (!val) {
+    el.classList.remove('error'); el.classList.remove('ok');
+    err.classList.remove('show'); return true;
+  }
+  // ハイフンあり・固定電話(XX-XXXX-XXXX 10桁)または携帯(XXX-XXXX-XXXX 11桁)
+  // パターン例：090-1234-5678 / 080-123-4567 / 0977-12-3456 / 03-1234-5678
+  var regex = /^0\d{1,4}-\d{1,4}-\d{3,4}$/;
+  var digits = val.replace(/-/g, '');
+  var validDigits = digits.length === 10 || digits.length === 11;
+  if (!regex.test(val) || !validDigits) {
+    el.classList.add('error'); el.classList.remove('ok');
+    err.classList.add('show'); return false;
+  }
+  el.classList.remove('error'); el.classList.add('ok');
+  err.classList.remove('show'); return true;
+}
+
+function validateMessage() {
+  var val = document.getElementById('message').value.trim();
+  var el = document.getElementById('message');
+  var err = document.getElementById('err-message');
+  if (!val) {
+    el.classList.add('error'); el.classList.remove('ok');
+    err.classList.add('show'); return false;
+  }
+  el.classList.remove('error'); el.classList.add('ok');
+  err.classList.remove('show'); return true;
+}
+
+/* ---- 送信処理（mailto方式） ---- */
 function submitForm() {
-  const name = document.getElementById('name').value;
-  const email = document.getElementById
+  // 全バリデーション実行
+  var ok = true;
+  if (!validateName())    ok = false;
+  if (!validateEmail())   ok = false;
+  if (!validateTel())     ok = false;
+  if (!validateMessage()) ok = false;
+  if (!ok) {
+    // 最初のエラー箇所までスクロール
+    var firstError = document.querySelector('.form-input.error, .form-textarea.error');
+    if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
+
+  var name    = document.getElementById('name').value.trim();
+  var email   = document.getElementById('email').value.trim();
+  var company = document.getElementById('company').value.trim() || '未記入';
+  var tel     = document.getElementById('tel').value.trim() || '未記入';
+  var plan    = document.getElementById('plan').value || '未選択';
+  var message = document.getElementById('message').value.trim();
+  var services = Array.from(document.querySelectorAll('input[name="service"]:checked'))
+                  .map(function(cb){ return cb.value; }).join('、') || '未選択';
+
+  var subject = '【A-connect HP】お問い合わせ：' + name + '様';
+  var body =
+    'お名前：' + name + '\n' +
+    '会社名・屋号：' + company + '\n' +
+    'メールアドレス：' + email + '\n' +
+    '電話番号：' + tel + '\n' +
+    'ご希望のサービス：' + services + '\n' +
+    'ご希望のプラン：' + plan + '\n' +
+    '\n' +
+    'お問い合わせ内容：\n' + message + '\n' +
+    '\n' +
+    '---\n' +
+    'A-connect HPのお問い合わせフォームより送信';
+
+  var mailtoLink = 'mailto:arakane@a-connect-hiji.com' +
+    '?subject=' + encodeURIComponent(subject) +
+    '&body='    + encodeURIComponent(body);
+
+  window.location.href = mailtoLink;
+
+  // 送信完了メッセージを表示
+  setTimeout(function() {
+    document.getElementById('form-area').style.display = 'none';
+    document.getElementById('success-msg').classList.add('show');
+  }, 800);
+}
+</script>
+
+</body>
+</html>

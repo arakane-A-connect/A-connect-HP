@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>わたしについて｜A-connect（エーコネクト）</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
     --green-deep: #2d5a3d; --green-mid: #4a7c5f;
@@ -120,6 +120,13 @@
   .footer-copy { font-size: 0.65rem; letter-spacing: 0.08em; }
 
   @media (max-width: 768px) {
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--cream); padding: 1rem 1.5rem; border-bottom: 1px solid var(--green-pale); gap: 0; z-index: 99; }
+    .nav-links.open { display: flex; }
+    .nav-links li { border-bottom: 1px solid var(--green-mist); }
+    .nav-links a { display: block; padding: 0.8rem 0; font-size: 0.9rem; }
+    .hamburger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; padding: 4px; cursor: pointer; }
+    .hamburger span { width: 22px; height: 1.5px; background: var(--green-deep); display: block; }
     .profile-section { padding: 3rem 1.5rem; }
     .profile-grid { grid-template-columns: 1fr; }
     .profile-card { position: static; }
@@ -133,7 +140,7 @@
 <body>
 <nav>
   <a href="index.html" class="nav-logo">A<span>-connect</span></a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-menu">
     <li><a href="about.html" class="active">わたしについて</a></li>
     <li><a href="service.html">サービス</a></li>
     <li><a href="estimate.html">概算見積</a></li>
