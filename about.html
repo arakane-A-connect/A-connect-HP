@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>わたしについて｜A-connect（エーコネクト）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #2d5a3d; --green-mid: #4a7c5f;
+    --green-light: #7aab8a; --green-pale: #c8dfc0;
+    --green-mist: #eef5eb; --cream: #faf8f3;
+    --text-dark: #1e2a1f; --text-mid: #4a5a4c; --text-light: #7a8a7c;
+    --accent: #8b6914; --accent-light: #d4a843;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: var(--cream); color: var(--text-dark); font-weight: 300; }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,248,243,0.95); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--green-pale);
+    padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px;
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; letter-spacing: 0.15em; color: var(--green-deep); text-decoration: none; }
+  .nav-logo span { font-style: italic; color: var(--green-mid); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text-mid); font-size: 0.8rem; letter-spacing: 0.08em; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--green-deep); }
+  .nav-cta { background: var(--green-deep); color: white; padding: 0.5rem 1.2rem; border-radius: 2px; font-size: 0.75rem; letter-spacing: 0.1em; text-decoration: none; }
+
+  /* ページヘッダー */
+  .page-header {
+    padding-top: 64px; background: var(--green-deep);
+    padding-bottom: 4rem; text-align: center; position: relative; overflow: hidden;
+  }
+  .page-header::before {
+    content: ''; position: absolute; top: -80px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(122,171,138,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .page-header-en { font-family: 'Cormorant Garamond', serif; font-size: 0.8rem; letter-spacing: 0.3em; color: var(--green-pale); margin-bottom: 0.8rem; margin-top: 3rem; font-style: italic; }
+  .page-header-title { font-family: 'Noto Serif JP', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); color: white; font-weight: 300; }
+
+  /* プロフィール */
+  .profile-section { padding: 6rem 4rem; max-width: 960px; margin: 0 auto; }
+  .profile-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start; }
+  .profile-card {
+    background: white; border-radius: 4px; padding: 2rem;
+    border: 1px solid var(--green-pale); text-align: center; position: sticky; top: 84px;
+  }
+  .profile-avatar {
+    width: 120px; height: 120px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--green-pale), var(--green-mist));
+    margin: 0 auto 1.2rem; display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; border: 3px solid var(--green-light);
+  }
+  .profile-name { font-family: 'Noto Serif JP', serif; font-size: 1.1rem; color: var(--green-deep); font-weight: 400; margin-bottom: 0.3rem; }
+  .profile-name-en { font-family: 'Cormorant Garamond', serif; font-size: 0.8rem; color: var(--text-light); letter-spacing: 0.15em; margin-bottom: 1rem; }
+  .profile-badge {
+    display: inline-block; font-size: 0.65rem; padding: 0.3rem 0.8rem;
+    background: var(--green-mist); color: var(--green-mid);
+    border-radius: 2px; letter-spacing: 0.08em; margin-bottom: 1.2rem;
+  }
+  .profile-info-list { text-align: left; border-top: 1px solid var(--green-pale); padding-top: 1rem; }
+  .profile-info-item { display: flex; gap: 0.8rem; padding: 0.5rem 0; font-size: 0.72rem; border-bottom: 1px solid var(--green-mist); }
+  .profile-info-label { color: var(--text-light); min-width: 60px; }
+  .profile-info-value { color: var(--text-mid); }
+
+  /* ストーリー */
+  .story-content { }
+  .story-section { margin-bottom: 3rem; }
+  .story-tag { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green-light); margin-bottom: 0.8rem; }
+  .story-heading { font-family: 'Noto Serif JP', serif; font-size: 1.2rem; color: var(--green-deep); font-weight: 300; margin-bottom: 1.2rem; line-height: 1.7; }
+  .story-text { font-size: 0.82rem; color: var(--text-mid); line-height: 2.1; margin-bottom: 1rem; }
+  .story-quote {
+    border-left: 3px solid var(--green-light);
+    padding: 1rem 1.5rem; margin: 1.5rem 0;
+    background: var(--green-mist);
+    border-radius: 0 4px 4px 0;
+  }
+  .story-quote p { font-family: 'Noto Serif JP', serif; font-size: 0.9rem; color: var(--green-deep); font-weight: 300; line-height: 1.9; }
+
+  /* 課題と解決 */
+  .problems-section { padding: 5rem 4rem; background: white; }
+  .problems-section .inner { max-width: 960px; margin: 0 auto; }
+  .section-header { text-align: center; margin-bottom: 3.5rem; }
+  .section-en { font-family: 'Cormorant Garamond', serif; font-size: 0.8rem; letter-spacing: 0.3em; color: var(--green-light); text-transform: uppercase; margin-bottom: 0.8rem; }
+  .section-title { font-family: 'Noto Serif JP', serif; font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 300; color: var(--green-deep); }
+  .section-line { width: 40px; height: 1px; background: var(--green-light); margin: 1rem auto 0; }
+  .problems-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .problem-card {
+    padding: 1.8rem; border: 1px solid var(--green-pale); border-radius: 4px;
+    position: relative;
+  }
+  .problem-num {
+    font-family: 'Cormorant Garamond', serif; font-size: 2.5rem;
+    color: var(--green-pale); font-weight: 300; margin-bottom: 0.5rem; line-height: 1;
+  }
+  .problem-title { font-size: 0.85rem; color: var(--green-deep); font-weight: 500; margin-bottom: 0.8rem; }
+  .problem-list { list-style: none; }
+  .problem-list li { font-size: 0.75rem; color: var(--text-mid); padding: 0.3rem 0; padding-left: 1rem; position: relative; }
+  .problem-list li::before { content: '・'; position: absolute; left: 0; color: var(--green-light); }
+  .arrow-down { text-align: center; padding: 2rem; font-size: 1.5rem; color: var(--green-light); }
+  .solution-box {
+    background: var(--green-deep); color: white; padding: 2rem;
+    border-radius: 4px; text-align: center;
+  }
+  .solution-box p { font-family: 'Noto Serif JP', serif; font-size: 1rem; font-weight: 300; line-height: 1.9; }
+  .solution-box em { color: var(--accent-light); font-style: normal; }
+
+  /* フッター */
+  footer { background: var(--text-dark); color: var(--text-light); padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: white; letter-spacing: 0.15em; }
+  .footer-info { font-size: 0.72rem; line-height: 1.9; }
+  .footer-info a { color: var(--green-pale); text-decoration: none; }
+  .footer-copy { font-size: 0.65rem; letter-spacing: 0.08em; }
+
+  @media (max-width: 768px) {
+    .profile-section { padding: 3rem 1.5rem; }
+    .profile-grid { grid-template-columns: 1fr; }
+    .profile-card { position: static; }
+    .problems-section { padding: 3rem 1.5rem; }
+    .problems-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    footer { padding: 2rem; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">A<span>-connect</span></a>
+  <ul class="nav-links">
+    <li><a href="about.html" class="active">わたしについて</a></li>
+    <li><a href="service.html">サービス</a></li>
+    <li><a href="estimate.html">概算見積</a></li>
+    <li><a href="contact.html">お問い合わせ</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">無料相談する</a>
+</nav>
+
+<div class="page-header">
+  <p class="page-header-en">About Me</p>
+  <h1 class="page-header-title">わたしについて</h1>
+</div>
+
+<section class="profile-section">
+  <div class="profile-grid">
+    <!-- プロフィールカード -->
+    <div>
+      <div class="profile-card">
+        <div class="profile-avatar">🌿</div>
+        <p class="profile-name">荒金 亜弓</p>
+        <p class="profile-name-en">Ayumi Arakane</p>
+        <span class="profile-badge">個人事業主</span>
+        <div class="profile-info-list">
+          <div class="profile-info-item">
+            <span class="profile-info-label">屋号</span>
+            <span class="profile-info-value">A-connect（エーコネクト）</span>
+          </div>
+          <div class="profile-info-item">
+            <span class="profile-info-label">所在地</span>
+            <span class="profile-info-value">大分県速見郡日出町</span>
+          </div>
+          <div class="profile-info-item">
+            <span class="profile-info-label">対応</span>
+            <span class="profile-info-value">オンライン全国対応</span>
+          </div>
+          <div class="profile-info-item">
+            <span class="profile-info-label">TEL</span>
+            <span class="profile-info-value">080-4281-8276</span>
+          </div>
+          <div class="profile-info-item">
+            <span class="profile-info-label">Mail</span>
+            <span class="profile-info-value" style="font-size:0.68rem;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0f6e7d6e646e616a4f6e226c6061616a6c7b2267666566216c6062">[email&#160;protected]</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ストーリー -->
+    <div class="story-content">
+      <div class="story-section">
+        <p class="story-tag">Why I started</p>
+        <h2 class="story-heading">なぜA-connectを<br>始めたのか</h2>
+        <p class="story-text">
+          はじめまして。大分県速見郡日出町在住の荒金亜弓と申します。
+          個人事業主として、地域の事業者様をオンラインでサポートする
+          「A-connect（エーコネクト）」を運営しております。
+        </p>
+        <p class="story-text">
+          地域の中小企業・個人事業主の方々と関わる中で、
+          「人手は欲しいけど採用は難しい」「デジタル化したいけど何から始めればいいかわからない」
+          というお声をたくさん聞いてきました。
+        </p>
+        <div class="story-quote">
+          <p>「もっと本業に集中できたら、もっと会社を成長させられるのに。」</p>
+        </div>
+        <p class="story-text">
+          そんな想いを持つ経営者様の「右腕」になりたい。
+          バックオフィスの仕事を丸ごと引き受けることで、
+          大切な時間とエネルギーを本業に向けていただきたい。
+          そういった想いからA-connectをスタートしました。
+        </p>
+      </div>
+
+      <div class="story-section">
+        <p class="story-tag">My Policy</p>
+        <h2 class="story-heading">大切にしていること</h2>
+        <p class="story-text">
+          「依頼者様に必ず利益を」——これがA-connectのモットーです。
+          単に作業をこなすのではなく、ご依頼いただいた仕事が
+          お客様の事業の成長につながることを常に意識しています。
+        </p>
+        <p class="story-text">
+          また、ITやデジタルへの苦手意識がある方にも
+          安心してご相談いただけるよう、専門用語を使わず
+          わかりやすい言葉でコミュニケーションを取ることを心がけています。
+        </p>
+        <p class="story-text">
+          地元・日出町を拠点に、オンラインで全国の事業者様をサポートしながら、
+          地域の活性化にも貢献していきたいと考えています。
+        </p>
+      </div>
+
+      <div class="story-section">
+        <p class="story-tag">Services</p>
+        <h2 class="story-heading">提供できること</h2>
+        <p class="story-text">
+          事務代行・秘書業務・ITサポート・新人社員教育代行まで、
+          バックオフィス全般を幅広くサポートいたします。
+          「こんなこともお願いできる？」というご相談も大歓迎です。
+        </p>
+        <a href="service.html" style="display:inline-block;margin-top:0.5rem;font-size:0.8rem;color:var(--green-mid);text-decoration:none;border-bottom:1px solid var(--green-pale);padding-bottom:2px;">サービス詳細を見る →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 課題と解決 -->
+<section class="problems-section">
+  <div class="inner">
+    <div class="section-header">
+      <p class="section-en">Problems & Solutions</p>
+      <h2 class="section-title">地域企業が抱える「3つの壁」を解決します</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="problems-grid">
+      <div class="problem-card">
+        <p class="problem-num">01</p>
+        <p class="problem-title">人手不足・コストの壁</p>
+        <ul class="problem-list">
+          <li>採用が難しい</li>
+          <li>パート雇用の固定費が重い</li>
+          <li>採用コストがかかる</li>
+        </ul>
+      </div>
+      <div class="problem-card">
+        <p class="problem-num">02</p>
+        <p class="problem-title">デジタル化の壁</p>
+        <ul class="problem-list">
+          <li>ITへの不安がある</li>
+          <li>AIやクラウドがわからない</li>
+          <li>何から始めればいいか不明</li>
+        </ul>
+      </div>
+      <div class="problem-card">
+        <p class="problem-num">03</p>
+        <p class="problem-title">新人教育の壁</p>
+        <ul class="problem-list">
+          <li>教育担当者の時間がない</li>
+          <li>マニュアルが整備されていない</li>
+          <li>教育品質にムラがある</li>
+        </ul>
+      </div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="solution-box">
+      <p>A-connectは<em>「オンライン秘書」「デジタル伴走者」「新人教育パートナー」</em>の3つの役割で<br>貴社の課題をまるごと解決いたします。</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <p class="footer-logo">A-connect</p>
+    <p style="font-size:0.65rem;color:var(--green-pale);margin-top:0.3rem;">エーコネクト</p>
+  </div>
+  <div class="footer-info">
+    <p>荒金 亜弓（あらかね あゆみ）</p>
+    <p>大分県速見郡日出町</p>
+    <p>TEL: <a href="tel:08042818276">080-4281-8276</a></p>
+    <p>E-mail: <a href="/cdn-cgi/l/email-protection#9effecfff5fff0fb

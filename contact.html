@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お問い合わせ｜A-connect（エーコネクト）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #2d5a3d; --green-mid: #4a7c5f;
+    --green-light: #7aab8a; --green-pale: #c8dfc0;
+    --green-mist: #eef5eb; --cream: #faf8f3;
+    --text-dark: #1e2a1f; --text-mid: #4a5a4c; --text-light: #7a8a7c;
+    --accent: #8b6914; --accent-light: #d4a843;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: var(--cream); color: var(--text-dark); font-weight: 300; }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,248,243,0.95); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--green-pale);
+    padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px;
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; letter-spacing: 0.15em; color: var(--green-deep); text-decoration: none; }
+  .nav-logo span { font-style: italic; color: var(--green-mid); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text-mid); font-size: 0.8rem; letter-spacing: 0.08em; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--green-deep); }
+  .nav-cta { background: var(--green-deep); color: white; padding: 0.5rem 1.2rem; border-radius: 2px; font-size: 0.75rem; letter-spacing: 0.1em; text-decoration: none; }
+
+  .page-header { padding-top: 64px; background: var(--green-deep); padding-bottom: 4rem; text-align: center; }
+  .page-header-en { font-family: 'Cormorant Garamond', serif; font-size: 0.8rem; letter-spacing: 0.3em; color: var(--green-pale); margin-bottom: 0.8rem; margin-top: 3rem; font-style: italic; }
+  .page-header-title { font-family: 'Noto Serif JP', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); color: white; font-weight: 300; }
+
+  /* 問い合わせ方法 */
+  .contact-section { padding: 5rem 4rem; max-width: 900px; margin: 0 auto; }
+  .section-header { text-align: center; margin-bottom: 3rem; }
+  .section-en { font-family: 'Cormorant Garamond', serif; font-size: 0.8rem; letter-spacing: 0.3em; color: var(--green-light); text-transform: uppercase; margin-bottom: 0.8rem; }
+  .section-title { font-family: 'Noto Serif JP', serif; font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 300; color: var(--green-deep); }
+  .section-line { width: 40px; height: 1px; background: var(--green-light); margin: 1rem auto 0; }
+
+  /* 連絡手段カード */
+  .contact-methods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 4rem; }
+  .method-card {
+    background: white; border: 1px solid var(--green-pale); border-radius: 4px;
+    padding: 2rem; text-align: center; transition: all 0.3s;
+  }
+  .method-card:hover { box-shadow: 0 8px 30px rgba(45,90,61,0.1); border-color: var(--green-light); }
+  .method-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+  .method-title { font-family: 'Noto Serif JP', serif; font-size: 0.9rem; color: var(--green-deep); font-weight: 400; margin-bottom: 0.5rem; }
+  .method-value { font-size: 0.78rem; color: var(--text-mid); margin-bottom: 1rem; line-height: 1.7; }
+  .method-btn {
+    display: inline-block; padding: 0.6rem 1.2rem;
+    background: var(--green-deep); color: white;
+    font-size: 0.72rem; border-radius: 2px; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .method-btn:hover { background: var(--green-mid); }
+  .method-btn.line { background: #06C755; }
+  .method-btn.line:hover { background: #05a848; }
+
+  /* 区切り */
+  .divider { display: flex; align-items: center; gap: 1rem; margin: 2rem 0; }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--green-pale); }
+  .divider span { font-size: 0.72rem; color: var(--text-light); white-space: nowrap; }
+
+  /* メールフォーム */
+  .form-section { background: white; border: 1px solid var(--green-pale); border-radius: 4px; padding: 2.5rem; }
+  .form-title { font-family: 'Noto Serif JP', serif; font-size: 1rem; color: var(--green-deep); font-weight: 400; margin-bottom: 2rem; text-align: center; }
+
+  .form-group { margin-bottom: 1.5rem; }
+  .form-label { display: block; font-size: 0.75rem; color: var(--text-mid); margin-bottom: 0.5rem; letter-spacing: 0.05em; }
+  .form-label .required { color: #c8796a; font-size: 0.65rem; margin-left: 0.3rem; }
+  .form-input, .form-select, .form-textarea {
+    width: 100%; padding: 0.75rem 1rem;
+    border: 1px solid var(--green-pale); border-radius: 3px;
+    font-family: 'Noto Sans JP', sans-serif; font-size: 0.8rem;
+    color: var(--text-dark); background: var(--cream);
+    transition: border-color 0.2s; outline: none;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--green-mid); background: white; }
+  .form-textarea { height: 140px; resize: vertical; line-height: 1.8; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .check-group { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+  .form-check { display: flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; color: var(--text-mid); cursor: pointer; }
+  .form-check input { accent-color: var(--green-deep); }
+
+  .form-submit {
+    width: 100%; padding: 1rem;
+    background: var(--green-deep); color: white;
+    border: none; border-radius: 2px; font-size: 0.85rem;
+    font-family: 'Noto Sans JP', sans-serif;
+    letter-spacing: 0.1em; cursor: pointer; transition: background 0.2s;
+    margin-top: 0.5rem;
+  }
+  .form-submit:hover { background: var(--green-mid); }
+  .form-note { font-size: 0.7rem; color: var(--text-light); text-align: center; margin-top: 1rem; line-height: 1.8; }
+
+  /* 営業時間 */
+  .hours-section { padding: 3rem 4rem; background: var(--green-mist); }
+  .hours-section .inner { max-width: 900px; margin: 0 auto; display: flex; gap: 3rem; align-items: center; flex-wrap: wrap; }
+  .hours-title { font-family: 'Noto Serif JP', serif; font-size: 0.9rem; color: var(--green-deep); font-weight: 400; margin-bottom: 1rem; }
+  .hours-table { font-size: 0.78rem; color: var(--text-mid); }
+  .hours-row { display: flex; gap: 2rem; padding: 0.4rem 0; border-bottom: 1px solid var(--green-pale); }
+  .hours-day { min-width: 80px; }
+  .hours-note { font-size: 0.72rem; color: var(--text-light); margin-top: 0.8rem; }
+
+  footer { background: var(--text-dark); color: var(--text-light); padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: white; letter-spacing: 0.15em; }
+  .footer-info { font-size: 0.72rem; line-height: 1.9; }
+  .footer-info a { color: var(--green-pale); text-decoration: none; }
+  .footer-copy { font-size: 0.65rem; }
+
+  /* 送信完了 */
+  .success-msg { display: none; text-align: center; padding: 2rem; }
+  .success-msg.show { display: block; }
+  .success-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .success-title { font-family: 'Noto Serif JP', serif; font-size: 1.2rem; color: var(--green-deep); margin-bottom: 0.8rem; }
+  .success-text { font-size: 0.8rem; color: var(--text-mid); line-height: 2; }
+
+  @media (max-width: 768px) {
+    .contact-section { padding: 3rem 1.5rem; }
+    .contact-methods { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .check-group { grid-template-columns: 1fr; }
+    .hours-section { padding: 2rem 1.5rem; }
+    .nav-links { display: none; }
+    footer { padding: 2rem; flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">A<span>-connect</span></a>
+  <ul class="nav-links">
+    <li><a href="about.html">わたしについて</a></li>
+    <li><a href="service.html">サービス</a></li>
+    <li><a href="estimate.html">概算見積</a></li>
+    <li><a href="contact.html" class="active">お問い合わせ</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">無料相談する</a>
+</nav>
+
+<div class="page-header">
+  <p class="page-header-en">Contact</p>
+  <h1 class="page-header-title">お問い合わせ</h1>
+</div>
+
+<section class="contact-section">
+  <div class="section-header">
+    <p class="section-en">Get in touch</p>
+    <h2 class="section-title">お気軽にご連絡ください</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <!-- 連絡手段 -->
+  <div class="contact-methods">
+    <div class="method-card">
+      <span class="method-icon">📞</span>
+      <p class="method-title">お電話</p>
+      <p class="method-value">080-4281-8276<br>平日 9:00〜18:00</p>
+      <a href="tel:08042818276" class="method-btn">電話をかける</a>
+    </div>
+    <div class="method-card">
+      <span class="method-icon">💬</span>
+      <p class="method-title">LINE</p>
+      <p class="method-value">LINEでのお問い合わせも<br>お気軽にどうぞ</p>
+      <a href="#" class="method-btn line">LINEで相談する</a>
+    </div>
+    <div class="method-card">
+      <span class="method-icon">✉️</span>
+      <p class="method-title">メール</p>
+      <p class="method-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a8c9dac9c3c9c6cde8c985cbc7c6c6cdcbdc85c0c1c2c186cbc7c5">[email&#160;protected]</a><br>24時間受付</p>
+      <a href="/cdn-cgi/l/email-protection#48293a292329262d0829652b2726262d2b3c6520212221662b2725" class="method-btn">メールを送る</a>
+    </div>
+  </div>
+
+  <div class="divider"><span>または下記フォームからもどうぞ</span></div>
+
+  <!-- メールフォーム -->
+  <div class="form-section">
+    <p class="form-title">お問い合わせフォーム</p>
+
+    <div id="form-area">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">お名前 <span class="required">必須</span></label>
+          <input type="text" class="form-input" id="name" placeholder="山田 太郎">
+        </div>
+        <div class="form-group">
+          <label class="form-label">会社名・屋号</label>
+          <input type="text" class="form-input" id="company" placeholder="〇〇株式会社">
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">メールアドレス <span class="required">必須</span></label>
+          <input type="email" class="form-input" id="email" placeholder="example@mail.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">電話番号</label>
+          <input type="tel" class="form-input" id="tel" placeholder="090-0000-0000">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">ご希望のサービス（複数選択OK）</label>
+        <div class="check-group">
+          <label class="form-check"><input type="checkbox"> 一般事務・書類作成</label>
+          <label class="form-check"><input type="checkbox"> 秘書・スケジュール管理</label>
+          <label class="form-check"><input type="checkbox"> 経理・請求書作成</label>
+          <label class="form-check"><input type="checkbox"> ITサポート・デジタル化</label>
+          <label class="form-check"><input type="checkbox"> Web・SNS・集客支援</label>
+          <label class="form-check"><input type="checkbox"> 新人社員教育代行</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">ご希望のプラン</label>
+        <select class="form-select" id="plan">
+          <option value="">選択してください</option>
+          <option>ライトプラン（月5時間 / ¥22,000〜）</option>
+          <option>スタンダードプラン（月10時間 / ¥42,900〜）</option>
+          <option>プレミアムプラン（月20時間 / ¥83,600〜）</option>
+          <option>まだ決まっていない・相談したい</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">お問い合わせ内容 <span class="required">必須</span></label>
+        <textarea class="form-textarea" id="message" placeholder="ご相談内容をお気軽にご記入ください。&#10;「〇〇の業務を月〇時間ほど依頼したい」など、ざっくりでも大丈夫です。"></textarea>
+      </div>
+      <button class="form-submit" onclick="submitForm()">送信する</button>
+      <p class="form-note">
+        ※ 通常2営業日以内にご返信いたします。<br>
+        ※ お急ぎの場合はお電話（080-4281-8276）またはLINEにてご連絡ください。
+      </p>
+    </div>
+
+    <div class="success-msg" id="success-msg">
+      <div class="success-icon">🌿</div>
+      <p class="success-title">お問い合わせありがとうございます</p>
+      <p class="success-text">
+        内容を確認の上、2営業日以内にご返信いたします。<br>
+        お急ぎの場合はお電話（080-4281-8276）にてご連絡ください。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 営業時間 -->
+<section class="hours-section">
+  <div class="inner">
+    <div>
+      <p class="hours-title">営業時間</p>
+      <div class="hours-table">
+        <div class="hours-row"><span class="hours-day">平日</span><span>9:00〜18:00</span></div>
+        <div class="hours-row"><span class="hours-day">土曜日</span><span>応相談</span></div>
+        <div class="hours-row"><span class="hours-day">日・祝日</span><span>休業</span></div>
+      </div>
+      <p class="hours-note">※ メール・LINEは24時間受付しております。</p>
+    </div>
+    <div>
+      <p class="hours-title">所在地</p>
+      <p style="font-size:0.78rem;color:var(--text-mid);line-height:2;">
+        大分県速見郡日出町<br>
+        ※ オンラインにて全国対応いたします。
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <p class="footer-logo">A-connect</p>
+    <p style="font-size:0.65rem;color:var(--green-pale);margin-top:0.3rem;">エーコネクト</p>
+  </div>
+  <div class="footer-info">
+    <p>荒金 亜弓（あらかね あゆみ）</p>
+    <p>大分県速見郡日出町</p>
+    <p>TEL: <a href="tel:08042818276">080-4281-8276</a></p>
+    <p>E-mail: <a href="/cdn-cgi/l/email-protection#6b0a190a000a050e2b0a46080405050e081f460302010245080406"><span class="__cf_email__" data-cfemail="83e2f1e2e8e2ede6c3e2aee0ecedede6e0f7aeebeae9eaade0ecee">[email&#160;protected]</span></a></p>
+  </div>
+  <p class="footer-copy">© 2025 A-connect All rights reserved.</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function submitForm() {
+  const name = document.getElementById('name').value;
+  const email = document.getElementById

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A-connect（エーコネクト）｜オンライン事務代行・バックオフィス支援</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep: #2d5a3d;
+    --green-mid: #4a7c5f;
+    --green-light: #7aab8a;
+    --green-pale: #c8dfc0;
+    --green-mist: #eef5eb;
+    --cream: #faf8f3;
+    --warm-white: #ffffff;
+    --text-dark: #1e2a1f;
+    --text-mid: #4a5a4c;
+    --text-light: #7a8a7c;
+    --accent: #8b6914;
+    --accent-light: #d4a843;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    font-weight: 300;
+  }
+
+  /* ナビゲーション */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,248,243,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--green-pale);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 300; letter-spacing: 0.15em;
+    color: var(--green-deep); text-decoration: none;
+  }
+  .nav-logo span { font-style: italic; color: var(--green-mid); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-mid);
+    font-size: 0.8rem; letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green-deep); }
+  .nav-cta {
+    background: var(--green-deep); color: white;
+    padding: 0.5rem 1.2rem; border-radius: 2px;
+    font-size: 0.75rem; letter-spacing: 0.1em;
+    text-decoration: none; transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--green-mid); }
+
+  /* ヒーローセクション */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 64px;
+  }
+  .hero-left {
+    background: var(--green-deep);
+    display: flex; flex-direction: column;
+    justify-content: center; padding: 6rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-left::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(122,171,138,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-left::after {
+    content: '';
+    position: absolute; bottom: -60px; left: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(200,223,192,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-tag {
+    font-size: 0.7rem; letter-spacing: 0.2em;
+    color: var(--green-pale); margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+  .hero-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 300; color: white;
+    line-height: 1.8; margin-bottom: 1rem;
+  }
+  .hero-title em {
+    font-style: normal; color: var(--accent-light);
+    display: block;
+  }
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem; color: var(--green-pale);
+    letter-spacing: 0.12em; margin-bottom: 2.5rem;
+    font-style: italic;
+  }
+  .hero-motto {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1rem; color: var(--accent-light);
+    border-left: 2px solid var(--accent-light);
+    padding-left: 1rem; margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent-light); color: var(--green-deep);
+    padding: 0.85rem 2rem; border-radius: 2px;
+    font-size: 0.8rem; letter-spacing: 0.1em;
+    text-decoration: none; font-weight: 500;
+    transition: all 0.2s; display: inline-block;
+  }
+  .btn-primary:hover { background: white; }
+  .btn-outline {
+    border: 1px solid rgba(255,255,255,0.4); color: white;
+    padding: 0.85rem 2rem; border-radius: 2px;
+    font-size: 0.8rem; letter-spacing: 0.1em;
+    text-decoration: none; transition: all 0.2s; display: inline-block;
+  }
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+  .hero-right {
+    background: var(--green-mist);
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    padding: 4rem; position: relative;
+  }
+  .hero-visual {
+    width: 100%; max-width: 360px;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 20px 60px rgba(45,90,61,0.12);
+    padding: 2.5rem;
+    position: relative;
+  }
+  .hero-visual::before {
+    content: '';
+    position: absolute; top: -8px; left: -8px;
+    right: 8px; bottom: 8px;
+    border: 1px solid var(--green-pale);
+    border-radius: 4px; z-index: -1;
+  }
+  .visual-label {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--green-light); margin-bottom: 1.2rem;
+  }
+  .visual-services { display: flex; flex-direction: column; gap: 0.8rem; }
+  .visual-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 0.8rem 1rem;
+    background: var(--green-mist);
+    border-radius: 3px;
+    border-left: 3px solid var(--green-light);
+  }
+  .visual-item-icon {
+    width: 32px; height: 32px;
+    background: var(--green-pale);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; flex-shrink: 0;
+  }
+  .visual-item-text { font-size: 0.75rem; color: var(--text-mid); line-height: 1.5; }
+  .visual-item-text strong { display: block; font-size: 0.8rem; color: var(--green-deep); font-weight: 500; }
+  .visual-price {
+    margin-top: 1.5rem; padding-top: 1.5rem;
+    border-top: 1px solid var(--green-pale);
+    text-align: center;
+  }
+  .visual-price-label { font-size: 0.65rem; color: var(--text-light); letter-spacing: 0.1em; }
+  .visual-price-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; color: var(--green-deep); font-weight: 400;
+  }
+  .visual-price-unit { font-size: 0.7rem; color: var(--text-light); }
+
+  /* 特徴セクション */
+  .features {
+    padding: 6rem 4rem; background: white;
+  }
+  .section-header { text-align: center; margin-bottom: 4rem; }
+  .section-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem; letter-spacing: 0.3em;
+    color: var(--green-light); text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-weight: 300; color: var(--green-deep);
+    line-height: 1.7;
+  }
+  .section-line {
+    width: 40px; height: 1px;
+    background: var(--green-light);
+    margin: 1.2rem auto 0;
+  }
+  .features-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2rem; max-width: 960px; margin: 0 auto;
+  }
+  .feature-card {
+    padding: 2rem;
+    border: 1px solid var(--green-pale);
+    border-radius: 4px;
+    text-align: center;
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .feature-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--green-light);
+    transform: scaleX(0); transition: transform 0.3s;
+  }
+  .feature-card:hover { box-shadow: 0 8px 30px rgba(45,90,61,0.1); }
+  .feature-card:hover::before { transform: scaleX(1); }
+  .feature-icon {
+    font-size: 2rem; margin-bottom: 1rem;
+    display: block;
+  }
+  .feature-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1rem; color: var(--green-deep);
+    font-weight: 400; margin-bottom: 0.8rem;
+  }
+  .feature-text {
+    font-size: 0.78rem; color: var(--text-mid);
+    line-height: 1.9;
+  }
+
+  /* 料金概要 */
+  .pricing-preview {
+    padding: 6rem 4rem; background: var(--green-mist);
+  }
+  .plans-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; max-width: 900px; margin: 0 auto;
+  }
+  .plan-card {
+    background: white; border-radius: 4px;
+    padding: 2rem; text-align: center;
+    border: 1px solid var(--green-pale);
+    transition: all 0.3s;
+  }
+  .plan-card.featured {
+    border-color: var(--green-mid);
+    box-shadow: 0 8px 30px rgba(45,90,61,0.12);
+    transform: translateY(-8px);
+  }
+  .plan-name {
+    font-size: 0.7rem; letter-spacing: 0.15em;
+    color: var(--green-light); margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+  .plan-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; color: var(--green-deep);
+    margin-bottom: 0.3rem;
+  }
+  .plan-price span { font-size: 1rem; }
+  .plan-hours {
+    font-size: 0.75rem; color: var(--text-light);
+    margin-bottom: 1.5rem;
+  }
+  .plan-link {
+    display: inline-block;
+    font-size: 0.75rem; color: var(--green-mid);
+    border: 1px solid var(--green-pale);
+    padding: 0.5rem 1.2rem; border-radius: 2px;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .plan-link:hover { background: var(--green-deep); color: white; border-color: var(--green-deep); }
+  .plan-note {
+    text-align: center; margin-top: 2rem;
+    font-size: 0.75rem; color: var(--text-light);
+  }
+
+  /* CTAセクション */
+  .cta-section {
+    padding: 6rem 4rem;
+    background: var(--green-deep);
+    text-align: center;
+  }
+  .cta-en {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem; letter-spacing: 0.3em;
+    color: var(--green-pale); margin-bottom: 1rem;
+    font-style: italic;
+  }
+  .cta-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    color: white; font-weight: 300;
+    line-height: 1.8; margin-bottom: 2.5rem;
+  }
+  .cta-title em { color: var(--accent-light); font-style: normal; }
+  .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  /* フッター */
+  footer {
+    background: var(--text-dark); color: var(--text-light);
+    padding: 3rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; color: white;
+    letter-spacing: 0.15em;
+  }
+  .footer-info { font-size: 0.72rem; line-height: 1.9; }
+  .footer-info a { color: var(--green-pale); text-decoration: none; }
+  .footer-copy { font-size: 0.65rem; letter-spacing: 0.08em; }
+
+  /* ハンバーガー（モバイル） */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 22px; height: 1.5px; background: var(--green-deep); display: block; transition: 0.3s; }
+
+  /* アニメーション */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left > * { animation: fadeUp 0.7s ease forwards; }
+  .hero-tag { animation-delay: 0.1s; }
+  .hero-title { animation-delay: 0.2s; }
+  .hero-sub { animation-delay: 0.3s; }
+  .hero-motto { animation-delay: 0.4s; }
+  .hero-btns { animation-delay: 0.5s; }
+
+  /* レスポンシブ */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 4rem 2rem; }
+    .hero-right { padding: 3rem 2rem; }
+    .features { padding: 4rem 2rem; }
+    .features-grid { grid-template-columns: 1fr; }
+    .pricing-preview { padding: 4rem 2rem; }
+    .plans-grid { grid-template-columns: 1fr; }
+    .plan-card.featured { transform: none; }
+    .cta-section { padding: 4rem 2rem; }
+    footer { padding: 2rem; flex-direction: column; text-align: center; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ナビゲーション -->
+<nav>
+  <a href="index.html" class="nav-logo">A<span>-connect</span></a>
+  <ul class="nav-links">
+    <li><a href="about.html">わたしについて</a></li>
+    <li><a href="service.html">サービス</a></li>
+    <li><a href="estimate.html">概算見積</a></li>
+    <li><a href="contact.html">お問い合わせ</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">無料相談する</a>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ヒーロー -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-tag">Oita / Online Back-Office Support</p>
+    <h1 class="hero-title">
+      忙しい経営者様の<br>
+      <em>「時間」を創出する</em>
+      オンライン事務代行
+    </h1>
+    <p class="hero-sub">A-connect ／ エーコネクト</p>
+    <p class="hero-motto">「依頼者様に必ず利益を」</p>
+    <div class="hero-btns">
+      <a href="service.html" class="btn-primary">サービスを見る</a>
+      <a href="estimate.html" class="btn-outline">概算見積を出す</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <p class="visual-label">Main Services</p>
+      <div class="visual-services">
+        <div class="visual-item">
+          <div class="visual-item-icon">📋</div>
+          <div class="visual-item-text">
+            <strong>一般事務・書類作成</strong>
+            データ入力・資料作成・メール対応
+          </div>
+        </div>
+        <div class="visual-item">
+          <div class="visual-item-icon">💼</div>
+          <div class="visual-item-text">
+            <strong>秘書・スケジュール管理</strong>
+            カレンダー調整・議事録・会議設定
+          </div>
+        </div>
+        <div class="visual-item">
+          <div class="visual-item-icon">💻</div>
+          <div class="visual-item-text">
+            <strong>ITサポート・デジタル化</strong>
+            クラウドツール・AI活用支援
+          </div>
+        </div>
+      </div>
+      <div class="visual-price">
+        <p class="visual-price-label">月額サブスクプラン</p>
+        <p class="visual-price-amount">¥22,000<span class="visual-price-unit">〜 / 月</span></p>
+        <p class="visual-price-unit">※ 5時間 / 月〜 追加費用なし</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 特徴 -->
+<section class="features">
+  <div class="section-header">
+    <p class="section-en">Why A-connect</p>
+    <h2 class="section-title">選ばれる3つの理由</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">🌿</span>
+      <h3 class="feature-title">地域密着・オンライン対応</h3>
+      <p class="feature-text">大分県日出町を拠点に、オンラインで全国対応。地元企業の活性化を心を込めてサポートします。</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">✨</span>
+      <h3 class="feature-title">必要な時に必要な分だけ</h3>
+      <p class="feature-text">月額サブスクで固定費を抑えながら、プロの事務スキルを活用。採用・教育コストは一切不要です。</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🤝</span>
+      <h3 class="feature-title">ITが苦手でも安心</h3>
+      <p class="feature-text">専門用語を使わず、わかりやすい言葉でサポート。デジタル化への不安も一緒に解決します。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 料金プレビュー -->
+<section class="pricing-preview">
+  <div class="section-header">
+    <p class="section-en">Pricing Plans</p>
+    <h2 class="section-title">シンプルな料金プラン</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="plans-grid">
+    <div class="plan-card">
+      <p class="plan-name">Light Plan</p>
+      <p class="plan-price"><span>¥</span>20,000</p>
+      <p class="plan-hours">5時間 / 月</p>
+      <a href="estimate.html" class="plan-link">見積を出す</a>
+    </div>
+    <div class="plan-card featured">
+      <p class="plan-name">Standard Plan</p>
+      <p class="plan-price"><span>¥</span>39,000</p>
+      <p class="plan-hours">10時間 / 月</p>
+      <a href="estimate.html" class="plan-link">見積を出す</a>
+    </div>
+    <div class="plan-card">
+      <p class="plan-name">Premium Plan</p>
+      <p class="plan-price"><span>¥</span>76,000</p>
+      <p class="plan-hours">20時間 / 月</p>
+      <a href="estimate.html" class="plan-link">見積を出す</a>
+    </div>
+  </div>
+  <p class="plan-note">※ すべて税込み・追加費用なし・修正時間はカウントしません ／ <a href="service.html" style="color:var(--green-mid)">サービス詳細を見る →</a></p>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <p class="cta-en">Let's start together</p>
+  <h2 class="cta-title">まずは<em>無料でご相談</em>ください。<br>あなたの「右腕」になります。</h2>
+  <div class="cta-btns">
+    <a href="contact.html" class="btn-primary">お問い合わせ・無料相談</a>
+    <a href="estimate.html" class="btn-outline">概算見積を出してみる</a>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer>
+  <div>
+    <p class="footer-logo">A-connect</p>
+    <p style="font-size:0.65rem;color:var(--green-pale);margin-top:0.3rem;">エーコネクト</p>
+  </div>
+  <div class="footer-info">
+    <p>荒金 亜弓（あらかね あゆみ）</p>
+    <p>大分県速見郡日出町</p>
+    <p>TEL: <a href="tel:08042818276">080-4281-8276</a></p>
+    <p>E-mail: <a href="/cdn-cgi/l/email-protection#b9d8cbd8d2d8d7dcf9d894dad6d7d7dcdacd94d1d0d3d097dad6d4"><span class="__cf_email__" data-cfemail="caabb8aba1aba4af8aabe7a9a5a4a4afa9bee7a2a3a0a3e4a9a5a7">[email&#160;protected]</span></a></p>
+  </div>
+  <p class="footer-copy">© 2025 A-connect All rights reserved.</p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function toggleMenu() {
+  const links = document.querySelector('.nav-links');
+  links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+  if (links.style.display === 'flex') {
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    
